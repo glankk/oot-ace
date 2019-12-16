@@ -1,0 +1,30 @@
+8011B511  pierre's song, file copy
+80102B80  pierre's song, live copy
+
+struct
+{
+  uint8_t   note;     /* 0x0000 */
+  char      pad_0x1;  /* 0x0001 */
+  uint16_t  duration; /* 0x0002 */
+  uint8_t   unk_0x4;  /* 0x0004 */ /* bz.[0x80102B64] */
+  uint8_t   vib;      /* 0x0005 */ /* bz.[0x80102B68] */
+  int8_t    bend;     /* 0x0006 */ /*  b.[0x80102B6C] */
+  /* 0x80: sharp */
+  /* 0x40: flat */
+  uint8_t   flag;     /* 0x0007 */ /* bz.[0x80102B70] & 0xC0 */
+                      /* 0x0008 */
+};
+
+0x80102B64  uint8_t;  /* 0x57,  b.[0x8010222C] */
+0x80102B68  uint8_t;  /* 0x00,  b.[0x80102230] */
+0x80102B6C  int8_t;   /* 0x00,  b.[0x80102228] */
+0x80102B70  uint8_t;  /* 0x00, bz.[0x80102218] */
+
+0x8010222C  int8_t;   /* 0x57 (from cart) */
+0x80102230  int8_t;   /* abs(b.[0x80121F20]) / 4 */
+0x80102228  int8_t;   /* b.[0x80121F21] */
+0x80102218  uint8_t;  /* 0xFF */
+
+0x80121F20  int8_t;   /* ocarina input adjusted x */
+0x80121F21  int8_t;   /* ocarina input adjusted y */
+0x80121F24  int32_t;  /* ocarina input pad */

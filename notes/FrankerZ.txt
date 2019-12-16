@@ -1,0 +1,22 @@
+800E8530	actor_ovl_tab
+800E8730	En_Bom
+800EB890	En_Dog
+
+800FE480	play_ovl_tab
+
+
+vram		ram		what			description
+80B49E50	801E9330				En_Dog
+80B4A2D4	801E97B4				ctor
+80B4A398	801E9878	bne $v1, $t7, 0x0020	prevent multiple dogs
+80B4AC0C	801EA0EC	jal 0x8004C130		register hitbox
+80B4AD50	801EA230				actor info
+
+vram		ram		what			description
+808301C0	80388B60				ovl_player_actor
+808318CC	8038A26C	jal 0x800253F0		spawn and carry actor
+80834180	8038CB20	beq $t5, $zero, 0x0018  check bomb ammo
+80834190	8038CB30	bnez $at, 0x0018        check bomb actor count
+80852048	803AA9E8				bomb/chu item table
+
+800CCBB8	z64_LoadOverlay

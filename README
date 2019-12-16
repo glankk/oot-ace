@@ -1,0 +1,19 @@
+oot ace stuff for pierre's song total control
+
+compiling the tools;
+c++ -O2 -g -o genstage1/genstage1 genstage1/genstage1.cc
+cc -O2 -g -o gensong/gensong gensong/gensong.c gensong/gzm.c gensong/vector.c
+cc -O2 -g -o genpayload/genpayload genpayload/genpayload.c
+
+making the pierre's song inputs;
+mips64-as -Os -o src/stage2.o src/stage2.s
+mips64-objcopy -O binary -j .text -j .data src/stage2.o src/stage2.bin
+genstage1/genstage1 0x00 0x80 0x30 v0 src/stage2.bin src/stage1.s
+mips64-as -o src/stage1.o src/stage1.s
+mips64-objcopy -O binary -j .text -j .data src/stage1.o src/stage1.bin
+gensong/gensong --raw -i src/stage1.bin -o song_macro
+
+making the payload inputs;
+mips64-as -Os -IFrankerZ -Isrc -o FrankerZ/FrankerZ.o FrankerZ/FrankerZ.s
+mips64-objcopy -O binary -j .text -j .data FrankerZ/FrankerZ.o FrankerZ/FrankerZ.bin
+genpayload/genpayload -i FrankerZ/FrankerZ.bin -o FrankerZ_macro
